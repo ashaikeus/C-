@@ -5,10 +5,13 @@ Song::Song() {
     artist = "Unknown";
     album = "Unknown";
     label = "Unknown";
+    language = "None";
     year = -1;
     length = 0;
     bool is_explicit = 0;
+	cout << "Song object created" << endl;
 };
+
 Song::~Song() {
     genres.clear();
     featuring.clear();
@@ -29,6 +32,9 @@ string Song::get_album() {
 };
 string Song::get_label() {
     return label;
+};
+string Song::get_language() {
+    return language;
 };
 int Song::get_year() {
     return year;
@@ -67,6 +73,14 @@ void Song::set_album(string new_) {
 void Song::set_label(string new_) {
     label = new_;
 };
+void Song::set_language(string new_language) {
+    if new_language.length() == 0 {
+        cout << "Language can't be empty" << endl;
+        return;
+    }
+    language = new_language;
+};
+
 void Song::set_year(int new_) {
     year = new_;
 };
@@ -92,35 +106,35 @@ void Song::set_used_in(vector<string> new_) {
     used_in = new_;
 };
 
-void add_genre(string g) {
+void Song::add_genre(string g) {
     if (g == "") {
 		cout << "! Empty name of the genre" << endl;
 		return;
 	}
 	genres.push_back(g);
 };
-void add_featuring(string g) {
+void Song::add_featuring(string g) {
     if (g == "") {
 		cout << "! Empty name of the featuring artist" << endl;
 		return;
 	}
 	featuring.push_back(g);
 };
-void add_lyricists(string g) {
+void Song::add_lyricists(string g) {
     if (g == "") {
 		cout << "! Empty name of the lyricist" << endl;
 		return;
 	}
 	lyricists.push_back(g);
 };
-void add_nominations(string g) {
+void Song::add_nominations(string g) {
     if (g == "") {
 		cout << "! Empty name of the nomination" << endl;
 		return;
 	}
 	nominations.push_back(g);
 };
-void add_used_in(string g) {
+void Song::add_used_in(string g) {
     if (g == "") {
 		cout << "! Empty name of the media in which the song was used" << endl;
 		return;
@@ -128,11 +142,17 @@ void add_used_in(string g) {
 	used_in.push_back(g);
 };
 
+int Song::calc_typicalness() {
+	cout << "Can't calculate the \"typicalness\" of this song: it has no subgenre information" << endl;
+	return -1;
+};
+
 void Song::Print() {
     cout << " " << artist " - " << name
         << " (" << length / 60 << ":" << length % 60 << endl
         << "(" << album << ", " << year << ")" << endl 
-        << "Label: " << label << endl;
+        << "Label: " << label << endl
+		<< "Language: " << language << endl;
     if (is_explicit) cout << "Explicit" << endl;
     if (genres.empty()) {
         cout << "No genre" << endl;
@@ -176,14 +196,16 @@ void Song::Print() {
             else cout << endl;
         }
     }
-}
+};
+
 void Song::to_String() {
     string end_result = "";
     end_result += "<Song>\n";
     end_result += name + "\n" +
                 artist + "\n" +
                 album + "\n" +
-                label + "\n";
+                label + "\n" +
+                language + "\n";
     end_result += to_string(year) + "\n" + to_string(length) + "\n" + to_string(is_explicit) + "\n";
     end_result += "<Genres>\n";
 	for (int i = 0; i < genres.size(); i++) {
@@ -211,7 +233,7 @@ void Song::to_String() {
 	}
 	end_result += "</Used in>\n";
     end_result += "</Song>";
-}
+};
 
 void Song::Fill() {
     string user_input;
@@ -233,6 +255,10 @@ void Song::Fill() {
     cout << "Name of the label: ";
 	getline(cin, user_input);
 	set_label(user_input);
+
+    cout << "Language used in the song: ";
+	getline(cin, user_input);
+	set_language(user_input);
 
 	cout << "Length of the song (in seconds): ";
 	getline(cin, user_input);
@@ -295,6 +321,7 @@ void Song::Load(vector<string> tokens) {
     set_artist(tokens[i++]);
     set_album(tokens[i++]);
     set_label(tokens[i++]);
+    set_language(tokens[i++]);
     cast_to_number(tokens[i++], user_int);
 	set_year(user_int);
     cast_to_number(tokens[i++], user_int);
@@ -351,4 +378,4 @@ void Song::Load(vector<string> tokens) {
 		add_used_in(tokens[i++]);
 	}
 	i++;
-}
+};

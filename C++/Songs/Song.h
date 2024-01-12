@@ -7,6 +7,7 @@ protected:
     string artist;
     string album;
     string label;
+    string language;
     int year;
     // string date;
     int length;  // in seconds
@@ -24,6 +25,7 @@ public:
     string get_artist();
     string get_album();
     string get_label();
+    string get_language();
     int get_year();
     int get_length();
     bool get_is_explicit();
@@ -37,6 +39,7 @@ public:
     void set_artist(string);
     void set_album(string);
     void set_label(string);
+    void set_language(string);
     void set_year(int);
     void set_length(int);
     void set_is_explicit(bool);
@@ -51,6 +54,8 @@ public:
     void add_lyricists(string);
     void add_nominations(string);
     void add_used_in(string);
+
+    int calc_typicalness();
 
 	void Print();
 	string to_String();

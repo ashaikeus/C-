@@ -1,4 +1,3 @@
-#pragma once
 #include "functions.h"
 
 void cast_to_number(string user_input, int& user_int) {
