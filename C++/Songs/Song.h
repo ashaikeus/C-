@@ -1,5 +1,9 @@
 #pragma once
+#include <iostream>
 #include <vector>
+#include <string>
+#include "functions.h"
+using namespace std;
 
 class Song {
 protected:
@@ -62,4 +66,4 @@ public:
 	void Fill();
 	void Load(vector<string>);
 	// void edit_Menu();
-}
+};

@@ -35,11 +35,11 @@ void Hiphop::set_is_very_fast(bool is_fast) {
     is_very_fast = is_fast;
 };
 void Hiphop::set_swear_words(int swears) {
-    if swears < 0 {
+    if (swears < 0) {
         cout << "you're insane, how can you swear " << swears << " times in the song? impossible" << endl;
         return;
     }
-    if swears > 0 {
+    if (swears > 0) {
         is_explicit = true;
     }
     swear_words = swears;
@@ -60,7 +60,7 @@ void Hiphop::Print() {
         " Contains " << swear_words << " swear words" << endl;
 };
 
-void Hiphop::to_String() {
+string Hiphop::to_String() {
     string end_result = "";
     end_result += "<Hiphop>\n";
     end_result += name + "\n" +
