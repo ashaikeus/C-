@@ -104,6 +104,7 @@ void Menu::load_songs() {
         }
 
 		else if (buffer == "<Rock>") {
+			printf("HEY\n");
 			while (getline(f, buffer)) {
 				if (buffer == "</Rock>") break;
 				string s = buffer;
@@ -214,7 +215,6 @@ void Menu::menu_sort() {
 			<< "2 - By song length" << endl
 			<< "3 - By song name" << endl
 			<< "4 - By artist name" << endl
-			<< "5 - By genre typicalness" << endl
 			<< "0 - Back to main menu" << endl
 			<< "> ";
 		getline(cin, user_input);
@@ -231,9 +231,6 @@ void Menu::menu_sort() {
             break;
 		case 4:
 			sort('a');
-            break;
-		case 5:
-			sort('t');
             break;
 		case 0:
 			return;
@@ -255,10 +252,9 @@ void Menu::sort(char mode) {
 	for (i = 1; i < Songs.size(); i++) {
 		for (j = 0; j < sorted.size(); j++) {
 			if (mode == 'y') if (Songs[i]->get_year() < sorted[j]->get_year()) break;
-			else if (mode == 'l') if (Songs[i]->get_length() < sorted[j]->get_length()) break;
-			else if (mode == 'n') if (Songs[i]->get_name() < sorted[j]->get_name()) break;
-			else if (mode == 'a') if (Songs[i]->get_artist() < sorted[j]->get_artist()) break;
-			else if (mode == 't') if (Songs[i]->calc_typicalness() < sorted[j]->calc_typicalness()) break;
+			if (mode == 'l') if (Songs[i]->get_length() < sorted[j]->get_length()) break;
+			if (mode == 'n') if (Songs[i]->get_name() < sorted[j]->get_name()) break;
+			if (mode == 'a') if (Songs[i]->get_artist() < sorted[j]->get_artist()) break;
 		}
 
 		if (j >= sorted.size())

@@ -131,8 +131,8 @@ void Song::add_used_in(string g) {
 }
 
 double Song::calc_typicalness() {
-	cout << "Can't calculate the \"typicalness\" of this song: it has no subgenre information" << endl;
-	return 0.0;
+	// cout << "Can't calculate the \"typicalness\" of this song: it has no subgenre information" << endl;
+	return -1;
 }
 
 void Song::Print() {

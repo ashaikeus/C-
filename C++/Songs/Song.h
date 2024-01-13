@@ -7,6 +7,7 @@ using namespace std;
 #include "functions.h"
 
 class Song {
+    friend class Menu;
 protected:
     string name;
     string artist;
@@ -14,7 +15,6 @@ protected:
     string label;
     string language;
     int year;
-    // string date;
     int length;  // in seconds
     bool is_explicit;
     vector<string> genres;
@@ -22,6 +22,8 @@ protected:
     vector<string> lyricists;
     vector<string> nominations;
     vector<string> used_in;
+
+	void edit_menu();
 public:
     Song();
     ~Song();
@@ -67,5 +69,4 @@ public:
 	string to_String();
 	void Fill();
 	void Load(vector<string>);
-	void edit_menu();
 };

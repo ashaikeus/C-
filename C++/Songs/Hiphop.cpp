@@ -47,8 +47,8 @@ void Hiphop::set_swear_words(int swears) {
 }
 
 double Hiphop::calc_typicalness() {
-    cout << "There are 4 typicalness points you can get for the genre of hiphop." << endl;
-    cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
+    // cout << "There are 4 typicalness points you can get for the genre of hiphop." << endl;
+    // cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
     double points = is_by_black + not(is_by_woman) + is_very_fast + is_explicit;
     return points / 4;
 }
@@ -58,7 +58,8 @@ void Hiphop::Print() {
     cout << " Is made by a black person: " << is_by_black << endl <<
         " Is made by a woman: " << is_by_woman << endl <<
         " Is very fast: " << is_very_fast << endl <<
-        " Contains " << swear_words << " swear words" << endl;
+        " Contains " << swear_words << " swear words" << endl <<
+		calc_typicalness() << "% typical for the genre Hiphop" << endl;
 }
 
 string Hiphop::to_String() {

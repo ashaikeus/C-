@@ -40,8 +40,8 @@ void Rock::set_has_growls(bool b) {
 }
 
 double Rock::calc_typicalness() {
-    cout << "There are 3 typicalness points you can get for the genre of rock." << endl;
-    cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
+    // cout << "There are 3 typicalness points you can get for the genre of rock." << endl;
+    // cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
     double points = (has_distorted_guitar || has_clean_guitar) + has_vocal + has_growls;
     return points / 3;
 }
@@ -51,7 +51,8 @@ void Rock::Print() {
     cout << " Has distorted guitars: " << has_distorted_guitar << endl <<
         " Has clean (acoustic / electric) guitars: " << has_clean_guitar << endl <<
         " Has vocal: " << has_vocal << endl <<
-        " Has growls: " << has_growls << endl;
+        " Has growls: " << has_growls << endl <<
+		calc_typicalness() << "% typical for the genre Rock" << endl;
 }
 
 string Rock::to_String() {
