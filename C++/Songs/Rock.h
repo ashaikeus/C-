@@ -21,9 +21,11 @@ public:
     void set_has_vocal(bool);
     void set_has_growls(bool);
 
+    double calc_typicalness();
+
     void Print();
 	string to_String();
 	void Fill();
 	void Load(vector<string>);
-	// void edit_Menu();
+	void edit_menu();
 };

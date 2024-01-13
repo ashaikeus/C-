@@ -1,4 +1,5 @@
 #include "Hiphop.h"
+using namespace std;
 
 Hiphop::Hiphop() {
     is_by_black = 0;
@@ -6,34 +7,34 @@ Hiphop::Hiphop() {
     is_very_fast = 0;
     swear_words = 0;
     cout << "Hiphop song object created" << endl;
-};
+}
 
 Hiphop::~Hiphop() {
     cout << "Hiphop song object destroyed" << endl;
-};
+}
 
 bool Hiphop::get_is_by_black() {
     return is_by_black;
-};
+}
 bool Hiphop::get_is_by_woman() {
     return is_by_woman;
-};
+}
 bool Hiphop::get_is_very_fast() {
     return is_very_fast;
-};
+}
 int Hiphop::get_swear_words() {
     return swear_words;
-};
+}
 
 void Hiphop::set_is_by_black(bool is_black) {
     is_by_black = is_black;
-};
+}
 void Hiphop::set_is_by_woman(bool is_woman) {
     is_by_woman = is_woman;
-};
+}
 void Hiphop::set_is_very_fast(bool is_fast) {
     is_very_fast = is_fast;
-};
+}
 void Hiphop::set_swear_words(int swears) {
     if (swears < 0) {
         cout << "you're insane, how can you swear " << swears << " times in the song? impossible" << endl;
@@ -43,14 +44,14 @@ void Hiphop::set_swear_words(int swears) {
         is_explicit = true;
     }
     swear_words = swears;
-};
+}
 
-int Hiphop::calc_typicalness() {
-    cout << "There are 4 typicalness point you can get for the genre of hiphop." << endl;
+double Hiphop::calc_typicalness() {
+    cout << "There are 4 typicalness points you can get for the genre of hiphop." << endl;
     cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
-    int points = is_by_black + not(is_by_woman) + is_very_fast + is_explicit;
-    return points;
-};
+    double points = is_by_black + not(is_by_woman) + is_very_fast + is_explicit;
+    return points / 4;
+}
 
 void Hiphop::Print() {
     Song::Print();
@@ -58,7 +59,7 @@ void Hiphop::Print() {
         " Is made by a woman: " << is_by_woman << endl <<
         " Is very fast: " << is_very_fast << endl <<
         " Contains " << swear_words << " swear words" << endl;
-};
+}
 
 string Hiphop::to_String() {
     string end_result = "";
@@ -97,8 +98,10 @@ string Hiphop::to_String() {
 
     end_result += bts(is_by_black) + "\n" + bts(is_by_woman) + "\n" + bts(is_very_fast) + "\n";
     end_result += to_string(swear_words) + "\n";
-    end_result += "</Hiphop>";
-};
+    end_result += "</Hiphop>\n";
+
+    return end_result;
+}
 
 void Hiphop::Fill() {
     Song::Fill();
@@ -109,21 +112,24 @@ void Hiphop::Fill() {
 
     cout << "Is the song by a black artist? (1 - yes, 0 - no) ";
 	getline(cin, user_input);
-	set_is_by_black(bts(user_input));
+    cast_to_bool(user_input, user_bool);
+	set_is_by_black(user_bool);
 
     cout << "Is the song by a woman? (1 - yes, 0 - no) ";
 	getline(cin, user_input);
-	set_is_by_woman(bts(user_input));
+    cast_to_bool(user_input, user_bool);
+	set_is_by_woman(user_bool);
 
     cout << "Does this song contain very fast rap parts? (1 - yes, 0 - no) ";
 	getline(cin, user_input);
-	set_is_very_fast(bts(user_input));
+    cast_to_bool(user_input, user_bool);
+	set_is_very_fast(user_bool);
 
     cout << "How many swear words does this song contain? ";
 	getline(cin, user_input);
 	cast_to_number(user_input, user_int);
 	set_swear_words(user_int);
-};
+}
 
 void Hiphop::Load(vector<string> tokens) {
     bool user_bool;
@@ -168,7 +174,7 @@ void Hiphop::Load(vector<string> tokens) {
 	}
 	i++;
 	while (tokens[i] != "</Lyricists>") {
-		add_lyricists(tokens[i++]);
+		add_lyricist(tokens[i++]);
 	}
 	i++;
 
@@ -178,7 +184,7 @@ void Hiphop::Load(vector<string> tokens) {
 	}
 	i++;
 	while (tokens[i] != "</Nominations>") {
-		add_nominations(tokens[i++]);
+		add_nomination(tokens[i++]);
 	}
 	i++;
 
@@ -200,4 +206,107 @@ void Hiphop::Load(vector<string> tokens) {
     set_is_very_fast(user_bool);
     cast_to_number(tokens[i++], user_int);
 	set_swear_words(user_int);
-};
+}
+
+void Hiphop::edit_menu() {
+	string user_input;
+	int int_case, user_int;
+	float user_float;
+	bool user_bool;
+
+	while (1) {
+		cout << "Edit options" << endl
+			<< "1 - Name" << endl
+			<< "2 - Artist" << endl
+			<< "3 - Album" << endl
+			<< "4 - Label" << endl
+			<< "5 - Language" << endl
+			<< "6 - Year" << endl
+			<< "7 - Length" << endl
+			<< "8 - Explicit or family friendly" << endl
+			<< "9 - Genres" << endl
+			<< "10 - Featuring" << endl
+			<< "11 - Lyricists" << endl
+			<< "12 - Nominations" << endl
+			<< "13 - Used in" << endl
+			<< "14 - Is by a black person" << endl
+			<< "15 - Is by a woman" << endl
+			<< "16 - Contains very fast rap parts" << endl
+			<< "17 - Swear words count" << endl
+			<< "0 - Exit" << endl;
+		getline(cin, user_input);
+		cast_to_number(user_input, int_case);
+		switch (int_case) {
+		case 1:
+			getline(cin, user_input);
+			set_name(user_input);
+			break;
+		case 2:
+			getline(cin, user_input);
+			set_artist(user_input);
+			break;
+		case 3:
+			getline(cin, user_input);
+			set_album(user_input);
+			break;
+		case 4:
+			getline(cin, user_input);
+			set_label(user_input);
+			break;
+		case 5:
+			getline(cin, user_input);
+			set_language(user_input);
+			break;
+		case 6:
+			getline(cin, user_input);
+			cast_to_number(user_input, user_int);
+			set_year(user_int);
+			break;
+		case 7:
+			getline(cin, user_input);
+			cast_to_number(user_input, user_int);
+			set_length(user_int);
+			break;
+		case 8:
+			getline(cin, user_input);
+			cast_to_bool(user_input, user_bool);
+			set_is_explicit(user_bool);
+			break;
+		case 9:
+			edit_vectors('g');
+			break;
+		case 10:
+			edit_vectors('f');
+			break;
+		case 11:
+			edit_vectors('l');
+			break;
+		case 12:
+			edit_vectors('n');
+			break;
+		case 13:
+			edit_vectors('u');
+			break;
+		case 14:
+			getline(cin, user_input);
+			cast_to_bool(user_input, user_bool);
+			set_is_by_black(user_bool);
+			break;
+		case 15:
+			getline(cin, user_input);
+			cast_to_bool(user_input, user_bool);
+			set_is_by_woman(user_bool);
+			break;
+		case 16:
+			getline(cin, user_input);
+			cast_to_bool(user_input, user_bool);
+			set_is_very_fast(user_bool);
+			break;
+		case 17:
+			getline(cin, user_input);
+			cast_to_number(user_input, user_int);
+			set_swear_words(user_int);
+			break;
+		}
+	}
+}

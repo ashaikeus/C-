@@ -1,9 +1,10 @@
 #pragma once
+using namespace std;
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 #include "functions.h"
-using namespace std;
 
 class Song {
 protected:
@@ -52,18 +53,19 @@ public:
     void set_lyricists(vector<string>);
     void set_nominations(vector<string>);
     void set_used_in(vector<string>);
-    
+
+    void edit_vectors(char);
     void add_genre(string);
     void add_featuring(string);
-    void add_lyricists(string);
-    void add_nominations(string);
+    void add_lyricist(string);
+    void add_nomination(string);
     void add_used_in(string);
 
-    int calc_typicalness();
+    double calc_typicalness();
 
 	void Print();
 	string to_String();
 	void Fill();
 	void Load(vector<string>);
-	// void edit_Menu();
+	void edit_menu();
 };

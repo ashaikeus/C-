@@ -1,11 +1,12 @@
 #include "Menu.h"
+using namespace std;
 
 Menu::Menu() {
     load_songs();
 }
 
 Menu::~Menu() {
-    cout << "Exit";
+    cout << "Program finished";
 }
 
 void Menu::Print() {
@@ -43,7 +44,8 @@ void Menu::menu_add() {
 			<< "1 - Song" << endl
 			<< "2 - Hiphop" << endl
 			<< "3 - Rock" << endl
-			<< "0 - Back to menu" << endl;
+			<< "0 - Back to menu" << endl
+			<< "> ";
 		getline(cin, user_input);
 		cast_to_number(user_input, int_case);
 		switch (int_case) {
@@ -124,10 +126,15 @@ void Menu::save_songs(string filename) {
 		cout << "File didn't open " << error.what();
 		return;
 	}
+	if (!f) {
+		cout << "Creating " << filename << "..." << endl;
+		f.open(filename, ios::out);
+	}
 	for (int i = 0; i < Songs.size(); i++) {
 		f << Songs[i]->to_String();
 	}
 	cout << "Songs saved\n";
+	f.close();
 }
 
 void Menu::menu_edit() {
@@ -138,7 +145,8 @@ void Menu::menu_edit() {
 			<< "1 - Add song" << endl
 			<< "2 - Edit song" << endl
 			<< "3 - Delete song" << endl
-			<< "0 - Back to main menu" << endl;
+			<< "0 - Back to main menu" << endl
+			<< "> ";
 		getline(cin, user_input);
 		cast_to_number(user_input, int_case);
 		switch (int_case) {
@@ -146,10 +154,10 @@ void Menu::menu_edit() {
 			menu_add();
 			break;
 		case 2:
-			menu_edit();
+			edit_song();
 			break;
 		case 3:
-			menu_delete();
+			delete_song();
 			break;
 		case 0:
 			return;
@@ -171,7 +179,7 @@ void Menu::edit_song() {
 		int_case--;
 
 		if (int_case >= 0 && int_case < Songs.size()) {
-			Songs[int_case]->menu_edit();
+			Songs[int_case]->edit_menu();
 			break;
 		}
 		cout << "Incorrect input" << endl;
@@ -206,7 +214,9 @@ void Menu::menu_sort() {
 			<< "2 - By song length" << endl
 			<< "3 - By song name" << endl
 			<< "4 - By artist name" << endl
-			<< "0 - Back to main menu" << endl;
+			<< "5 - By genre typicalness" << endl
+			<< "0 - Back to main menu" << endl
+			<< "> ";
 		getline(cin, user_input);
 		cast_to_number(user_input, int_case);
 		switch (int_case) {
@@ -221,6 +231,9 @@ void Menu::menu_sort() {
             break;
 		case 4:
 			sort('a');
+            break;
+		case 5:
+			sort('t');
             break;
 		case 0:
 			return;
@@ -245,6 +258,7 @@ void Menu::sort(char mode) {
 			else if (mode == 'l') if (Songs[i]->get_length() < sorted[j]->get_length()) break;
 			else if (mode == 'n') if (Songs[i]->get_name() < sorted[j]->get_name()) break;
 			else if (mode == 'a') if (Songs[i]->get_artist() < sorted[j]->get_artist()) break;
+			else if (mode == 't') if (Songs[i]->calc_typicalness() < sorted[j]->calc_typicalness()) break;
 		}
 
 		if (j >= sorted.size())
@@ -263,7 +277,7 @@ void Menu::sort(char mode) {
     menu_save(sorted, sorted.size());
 }
 
-void Menu::menu_save(vector<Song> sorted, int length) {
+void Menu::menu_save(vector<Song*> sorted, int length) {
     string user_input;
     cout << "Want to save the list? (y/n) ";
     getline(cin, user_input);
@@ -276,13 +290,13 @@ void Menu::menu_filter() {
     string user_input;
 	int int_case;
 	while (1) {
-		cout << "Filtr Menu" << endl
+		cout << "Filter menu" << endl
 			<< "1 - By release year" << endl
 			<< "2 - By song length" << endl
 			<< "3 - By song name" << endl
 			<< "4 - By artist name" << endl
-            << "5 - By main genre" << endl
-			<< "0 - Back to main menu" << endl;
+			<< "0 - Back to main menu" << endl
+			<< "> ";
 		getline(cin, user_input);
 		cast_to_number(user_input, int_case);
 		switch (int_case) {
@@ -297,9 +311,6 @@ void Menu::menu_filter() {
 			break;
 		case 4:
 			filter('a');
-			break;
-		case 5:
-			filter('g');
 			break;
 		case 0:
 			return;
@@ -317,7 +328,7 @@ void Menu::filter(char mode) {
 
     vector<Song*> filtered;
 	string user_input;
-	int i;
+	int i, cast_int;
 
     if (mode == 'y') {
         cout << "Show songs released before this year: " << endl;
@@ -359,23 +370,14 @@ void Menu::filter(char mode) {
         cout << "Input name of the song: ";
         getline(cin, user_input);
         for (i = 0; i < Songs.size(); i++) {
-            if (Songs[i].get_name() == user_input)
+            if (Songs[i]->get_name() == user_input)
                 filtered.push_back(Songs[i]);
         }
     } else if (mode == 'a') {
         cout << "Input name of the artist: ";
         getline(cin, user_input);
         for (i = 0; i < Songs.size(); i++) {
-            if (Songs[i].get_artist() == user_input)
-                filtered.push_back(Songs[i]);
-        }
-    } else if (mode == 'g') {
-        string Song_Genre = "class ";
-        cout << "Input genre: ";
-        getline(cin, user_input);
-        Song_Genre += user_input;
-        for (i = 0; i < Songs.size(); i++) {
-            if (typeid(*Songs[i]).name() == Song_Genre)
+            if (Songs[i]->get_artist() == user_input)
                 filtered.push_back(Songs[i]);
         }
     }
@@ -400,8 +402,9 @@ void Menu::main_menu() {
 			<< "3 - Edit" << endl
 			<< "4 - Save" << endl
 			<< "5 - Load" << endl
-			<< "6 - Filter" << endl //TODO: �������
-			<< "0 - Exit" << endl;
+			<< "6 - Filter" << endl
+			<< "0 - Exit" << endl
+			<< "> ";
 		getline(cin, user_input);
 		cast_to_number(user_input, int_case);
 		switch (int_case) {
@@ -415,7 +418,7 @@ void Menu::main_menu() {
 			menu_edit();
 			break;
 		case 4:
-			save_songs();
+			save_songs("Songs.txt");
 			break;
 		case 5:
 			load_songs();
@@ -424,7 +427,7 @@ void Menu::main_menu() {
 			menu_filter();
 			break;
 		case 0:
-            cout << "Bye";
+            cout << "Bye" << endl;
 			return;
 		default:
 			cout << "Incorrect input" << endl;

@@ -21,7 +21,7 @@ private:
 
     void menu_sort();
     void sort(char);
-    void menu_save(vector<Song>, int);
+    void menu_save(vector<Song*>, int);
 
     void menu_filter();
     void filter(char);

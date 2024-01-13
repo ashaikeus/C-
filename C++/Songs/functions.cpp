@@ -1,4 +1,5 @@
 #include "functions.h"
+using namespace std;
 
 void cast_to_number(string user_input, int& user_int) {
 	try {
@@ -21,4 +22,9 @@ string bts(bool user_bool) {
 	string result = "0";
 	if (user_bool) result = "1";
 	return result;
+}
+
+string two_digitize(int number) {
+	if (number % 10 == number) return "0" + to_string(number);
+	else return to_string(number);
 }

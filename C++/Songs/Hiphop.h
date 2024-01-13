@@ -21,11 +21,11 @@ public:
     void set_is_very_fast(bool);
     void set_swear_words(int);
 
-    int calc_typicalness();
+    double calc_typicalness();
 
 	void Print();
 	string to_String();
 	void Fill();
 	void Load(vector<string>);
-	// void edit_Menu();
+	void edit_menu();
 };
