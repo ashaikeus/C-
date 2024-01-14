@@ -37,28 +37,45 @@ vector<string> Song::get_nominations() { return nominations; }
 vector<string> Song::get_used_in() { return used_in; }
 
 void Song::set_name(string newname) {
+    if (newname.length() == 0) {
+		newname = "Untitled";
+    }
     name = newname;
 }
 void Song::set_artist(string new_) {
+    if (new_.length() == 0) {
+		new_ = "Unknown";
+    }
     artist = new_;
 }
 void Song::set_album(string new_) {
+    if (new_.length() == 0) {
+		new_ = "No album";
+    }
     album = new_;
 }
 void Song::set_label(string new_) {
+    if (new_.length() == 0) {
+		new_ = "No label";
+    }
     label = new_;
 }
 void Song::set_language(string new_language) {
     if (new_language.length() == 0) {
-        cout << "Language can't be empty" << endl;
-        return;
+		new_language = "None";
     }
     language = new_language;
 }
 void Song::set_year(int new_) {
+    if (new_ == -1) {
+		new_ = 0000;
+    }
     year = new_;
 }
 void Song::set_length(int new_) {
+    if (new_ == -1) {
+		new_ = 0;
+    }
     length = new_;
 }
 void Song::set_is_explicit(bool new_) {
@@ -138,7 +155,10 @@ double Song::calc_typicalness() {
 void Song::Print() {
     cout << " " << artist << " - " << name
         << " (" << length / 60 << ":" << two_digitize(length % 60) << ")" << endl
-        << "(" << album << ", " << year << ")" << endl 
+        << "(" << album << ", ";
+	if (year < 0) cout << -year << "BC";
+	else cout << year;
+	cout << ")" << endl 
         << "Label: " << label << endl
 		<< "Language: " << language << endl;
     if (is_explicit) cout << "Explicit" << endl;
