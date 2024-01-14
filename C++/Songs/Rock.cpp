@@ -43,7 +43,7 @@ double Rock::calc_typicalness() {
     // cout << "There are 3 typicalness points you can get for the genre of rock." << endl;
     // cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
     double points = (has_distorted_guitar || has_clean_guitar) + has_vocal + has_growls;
-    return points / 3;
+    return (points * 100) / 3;
 }
 
 void Rock::Print() {

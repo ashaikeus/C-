@@ -50,7 +50,7 @@ double Hiphop::calc_typicalness() {
     // cout << "There are 4 typicalness points you can get for the genre of hiphop." << endl;
     // cout << "The more points you get, the more 'average' and genre-fitting the song is." << endl;
     double points = is_by_black + not(is_by_woman) + is_very_fast + is_explicit;
-    return points / 4;
+    return (points * 100) / 4;
 }
 
 void Hiphop::Print() {

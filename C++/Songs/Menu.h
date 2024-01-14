@@ -1,4 +1,5 @@
 #pragma once
+#include <typeinfo>
 #include "Hiphop.h"
 #include "Rock.h"
 

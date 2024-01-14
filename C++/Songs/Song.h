@@ -65,8 +65,8 @@ public:
 
     double calc_typicalness();
 
-	void Print();
-	string to_String();
-	void Fill();
+	virtual void Print();
+	virtual string to_String();
+	virtual void Fill();
 	void Load(vector<string>);
 };

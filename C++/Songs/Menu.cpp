@@ -291,6 +291,7 @@ void Menu::menu_filter() {
 			<< "2 - By song length" << endl
 			<< "3 - By song name" << endl
 			<< "4 - By artist name" << endl
+			<< "5 - By main genre" << endl
 			<< "0 - Back to main menu" << endl
 			<< "> ";
 		getline(cin, user_input);
@@ -307,6 +308,9 @@ void Menu::menu_filter() {
 			break;
 		case 4:
 			filter('a');
+			break;
+		case 5:
+			filter('t');
 			break;
 		case 0:
 			return;
@@ -376,9 +380,18 @@ void Menu::filter(char mode) {
             if (Songs[i]->get_artist() == user_input)
                 filtered.push_back(Songs[i]);
         }
-    }
+    } else if (mode == 't') {
+        cout << "Input name of the genre (Rock and Hiphop currently supported): ";
+        getline(cin, user_input);
+		user_input = "class " + user_input;
+		cout << user_input << endl;
+		for (i = 0; i < Songs.size(); i++) {
+			if (typeid(*Songs[i]).name() == user_input)
+				filtered.push_back(Songs[i]);
+		}
+	}
 
-    cout << "List of filtered Songs: " << endl;
+    cout << "List of filtered songs: " << endl;
     for (int i = 0; i < filtered.size(); i++) {
         cout << i + 1 << ". ";
         filtered[i]->Print();
