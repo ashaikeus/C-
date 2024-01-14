@@ -308,6 +308,8 @@ void Hiphop::edit_menu() {
 			cast_to_number(user_input, user_int);
 			set_swear_words(user_int);
 			break;
+		case 0:
+			return;
 		}
 	}
 }

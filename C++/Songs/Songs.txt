@@ -1,2 +1,27 @@
-<Song>
-</Song>
+<Rock>
+1
+1
+1
+1
+1
+1
+1
+1
+<Genres>
+1
+1
+1
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
+0
+0
+1
+1
+</Rock>

@@ -52,7 +52,7 @@ void Rock::Print() {
         " Has clean (acoustic / electric) guitars: " << has_clean_guitar << endl <<
         " Has vocal: " << has_vocal << endl <<
         " Has growls: " << has_growls << endl <<
-		calc_typicalness() << "% typical for the genre Rock" << endl;
+		round(calc_typicalness()) << "% typical for the genre Rock" << endl;
 }
 
 string Rock::to_String() {
@@ -194,8 +194,11 @@ void Rock::Load(vector<string> tokens) {
 
     cast_to_bool(tokens[i++], user_bool);
     set_has_distorted_guitar(user_bool);
+    cast_to_bool(tokens[i++], user_bool);
     set_has_clean_guitar(user_bool);
+    cast_to_bool(tokens[i++], user_bool);
     set_has_vocal(user_bool);
+    cast_to_bool(tokens[i++], user_bool);
     set_has_growls(user_bool);
 }
 
@@ -298,6 +301,8 @@ void Rock::edit_menu() {
 			cast_to_bool(user_input, user_bool);
 			set_has_growls(user_bool);
 			break;
+		case 0:
+			return;
 		}
 	}
 }

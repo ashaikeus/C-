@@ -4,6 +4,7 @@ using namespace std;
 #include <fstream>
 #include <vector>
 #include <string>
+#include <cmath>
 #include "functions.h"
 
 class Song {
@@ -23,7 +24,7 @@ protected:
     vector<string> nominations;
     vector<string> used_in;
 
-	void edit_menu();
+	virtual void edit_menu();
 public:
     Song();
     ~Song();

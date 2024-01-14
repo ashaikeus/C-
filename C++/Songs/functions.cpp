@@ -17,8 +17,8 @@ void cast_to_bool(string user_input, bool& user_bool) {
 }
 
 string bts(bool user_bool) {
-	string result = "no";
-	if (user_bool) result = "yes";
+	string result = "0";
+	if (user_bool) result = "1";
 	return result;
 }
 

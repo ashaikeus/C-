@@ -104,7 +104,6 @@ void Menu::load_songs() {
         }
 
 		else if (buffer == "<Rock>") {
-			printf("HEY\n");
 			while (getline(f, buffer)) {
 				if (buffer == "</Rock>") break;
 				string s = buffer;
@@ -121,7 +120,7 @@ void Menu::load_songs() {
 void Menu::save_songs(string filename) {
 	fstream f;
 	try {
-		f.open(filename);
+		f.open(filename, ios::out | ios::trunc);
 	}
 	catch (const exception& error) {
 		cout << "File didn't open " << error.what();
@@ -129,7 +128,7 @@ void Menu::save_songs(string filename) {
 	}
 	if (!f) {
 		cout << "Creating " << filename << "..." << endl;
-		f.open(filename, ios::out);
+		f.open(filename, ios::out | ios::trunc);
 	}
 	for (int i = 0; i < Songs.size(); i++) {
 		f << Songs[i]->to_String();
