@@ -154,7 +154,7 @@ void Menu::menu_edit() {
 			menu_add();
 			break;
 		case 2:
-			edit_song();
+			menu_edit_song();
 			break;
 		case 3:
 			delete_song();
@@ -167,7 +167,7 @@ void Menu::menu_edit() {
 	}
 }
 
-void Menu::edit_song() {
+void Menu::menu_edit_song() {
     Print();
 	cout << "Which song do you want to edit? (0 - back to menu): ";
 	string user_input;
@@ -214,6 +214,7 @@ void Menu::menu_sort() {
 			<< "2 - By song length" << endl
 			<< "3 - By song name" << endl
 			<< "4 - By artist name" << endl
+			<< "5 - By release year within one genre" << endl
 			<< "0 - Back to main menu" << endl
 			<< "> ";
 		getline(cin, user_input);
@@ -231,6 +232,9 @@ void Menu::menu_sort() {
 		case 4:
 			sort('a');
             break;
+		case 5:
+			sort('t');
+            break;
 		case 0:
 			return;
 		default:
@@ -246,11 +250,23 @@ void Menu::sort(char mode) {
 		return;
 	}
 
+	if (mode == 't') {
+		vector<Song*> filtered;
+		string user_input;
+        cout << "Input name of the genre (Rock and Hiphop currently supported): ";
+        getline(cin, user_input);
+		user_input = "4" + user_input;
+		for (int i = 0; i < Songs.size(); i++) {
+			if (typeid(*Songs[i]).name() == user_input)
+				filtered.push_back(Songs[i]);
+		}
+	}
+
 	sorted.push_back(Songs[0]);
 	int i, j;
 	for (i = 1; i < Songs.size(); i++) {
 		for (j = 0; j < sorted.size(); j++) {
-			if (mode == 'y') if (Songs[i]->get_year() < sorted[j]->get_year()) break;
+			if (mode == 'y' or mode == 't') if (Songs[i]->get_year() < sorted[j]->get_year()) break;
 			if (mode == 'l') if (Songs[i]->get_length() < sorted[j]->get_length()) break;
 			if (mode == 'n') if (Songs[i]->get_name() < sorted[j]->get_name()) break;
 			if (mode == 'a') if (Songs[i]->get_artist() < sorted[j]->get_artist()) break;
@@ -382,20 +398,23 @@ void Menu::filter(char mode) {
     } else if (mode == 't') {
         cout << "Input name of the genre (Rock and Hiphop currently supported): ";
         getline(cin, user_input);
-		user_input = "class " + user_input;
-		cout << user_input << endl;
+		user_input = "4" + user_input;
 		for (i = 0; i < Songs.size(); i++) {
 			if (typeid(*Songs[i]).name() == user_input)
 				filtered.push_back(Songs[i]);
 		}
 	}
 
-    cout << "List of filtered songs: " << endl;
-    for (int i = 0; i < filtered.size(); i++) {
-        cout << i + 1 << ". ";
-        filtered[i]->Print();
-        cout << endl;
-    }
+	if(filtered.size() == 0) {
+		cout<< "no songs were found oops..\n";
+	} else {
+		cout << "List of filtered songs: " << endl;
+		for (int i = 0; i < filtered.size(); i++) {
+			cout << i + 1 << ". ";
+			filtered[i]->Print();
+			cout << endl;
+		}
+	}
 }
 
 

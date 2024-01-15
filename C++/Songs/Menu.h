@@ -17,7 +17,7 @@ private:
     void save_songs(string);
     void menu_edit();
 
-    void edit_song();
+    void menu_edit_song();
     void delete_song();
 
     void menu_sort();
