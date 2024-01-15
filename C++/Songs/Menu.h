@@ -2,15 +2,18 @@
 #include <typeinfo>
 #include "Hiphop.h"
 #include "Rock.h"
+#include "Book.h"
 
 class Menu {
 private:
     vector<Song*> Songs;
+    vector<Subgenre*> Subgenres;
     void Print();
 
     void add_song();
     void add_hiphop();
     void add_rock();
+    void add_audiobook();
 
     void menu_add();
     void load_songs();
@@ -26,6 +29,11 @@ private:
 
     void menu_filter();
     void filter(char);
+
+    void load_genres();
+    void print_genres();
+    // void menu_edit_genres();
+    // void edit_genres();
 
 public:
     Menu();

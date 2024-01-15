@@ -21,15 +21,26 @@ void Subgenre::set_description(string new_) {
     description = new_;
 }
 
+// string Subgenre::to_String() {
+// 	string output = "";
+// 	output += "Genre: " + name + " (" + description + ")";
+// 	return output;
+// }
 
-void Subgenre::Fill() {
+void Subgenre::Fill(string name, bool add_desc) {
 	string user_input;
 
-	cout << " Name: ";
-	getline(cin, user_input);
-	set_name(user_input);
+	if (name == "") {
+		cout << " Name: ";
+		getline(cin, user_input);
+		set_name(user_input);
+	} else {
+		set_name(name);
+	}
 
-	cout << " Description: ";
-	getline(cin, user_input);
-	set_description(user_input);
+	if (add_desc) {
+		cout << " Enter genre description: ";
+		getline(cin, user_input);
+		set_description(user_input);
+	}
 }

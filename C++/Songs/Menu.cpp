@@ -3,6 +3,7 @@ using namespace std;
 
 Menu::Menu() {
     load_songs();
+	load_genres();
 }
 
 Menu::~Menu() {
@@ -36,6 +37,12 @@ void Menu::add_rock() {
 	Songs.push_back(new_song);
 }
 
+void Menu::add_audiobook() {
+	Audiobook* new_audiobook = new Audiobook();
+	new_audiobook->Fill();
+	Songs.push_back(new_audiobook);
+}
+
 void Menu::menu_add() {
     string user_input;
 	int int_case = -1;
@@ -44,6 +51,7 @@ void Menu::menu_add() {
 			<< "1 - Song" << endl
 			<< "2 - Hiphop" << endl
 			<< "3 - Rock" << endl
+			<< "4 - Audiobook" << endl
 			<< "0 - Back to menu" << endl
 			<< "> ";
 		getline(cin, user_input);
@@ -57,6 +65,9 @@ void Menu::menu_add() {
 			break;
 		case 3:
 			add_rock();
+			break;
+		case 4:
+			add_audiobook();
 			break;
 		case 0:
 			return;
@@ -112,6 +123,18 @@ void Menu::load_songs() {
 			Rock* new_song = new Rock();
 			new_song->Load(tokens);
 			Songs.push_back(new_song);
+			tokens.clear();
+        }
+
+		else if (buffer == "<Audiobook>") {
+			while (getline(f, buffer)) {
+				if (buffer == "</Audiobook>") break;
+				string s = buffer;
+				tokens.push_back(s);
+			}
+			Audiobook* new_audiobook = new Audiobook();
+			new_audiobook->Load(tokens);
+			Songs.push_back(new_audiobook);
 			tokens.clear();
         }
     }
@@ -253,7 +276,7 @@ void Menu::sort(char mode) {
 	if (mode == 't') {
 		vector<Song*> filtered;
 		string user_input;
-        cout << "Input name of the genre (Rock and Hiphop currently supported): ";
+        cout << "Input name of the genre (Rock, Hiphop and Audiobook currently supported): ";
         getline(cin, user_input);
 		user_input = "4" + user_input;
 		for (int i = 0; i < Songs.size(); i++) {
@@ -396,7 +419,7 @@ void Menu::filter(char mode) {
                 filtered.push_back(Songs[i]);
         }
     } else if (mode == 't') {
-        cout << "Input name of the genre (Rock and Hiphop currently supported): ";
+        cout << "Input name of the genre (Rock, Hiphop and Audiobook currently supported): ";
         getline(cin, user_input);
 		user_input = "4" + user_input;
 		for (i = 0; i < Songs.size(); i++) {
@@ -430,6 +453,8 @@ void Menu::main_menu() {
 			<< "4 - Save" << endl
 			<< "5 - Load" << endl
 			<< "6 - Filter" << endl
+			<< "7 - Print genres" << endl
+			// << "8 - Edit genres" << endl
 			<< "0 - Exit" << endl
 			<< "> ";
 		getline(cin, user_input);
@@ -453,6 +478,12 @@ void Menu::main_menu() {
 		case 6:
 			menu_filter();
 			break;
+		case 7:
+			print_genres();
+			break;
+		// case 8:
+		// 	menu_edit_genres();
+		// 	break;
 		case 0:
             cout << "Bye" << endl;
 			return;
@@ -461,3 +492,70 @@ void Menu::main_menu() {
 		}
 	}
 }
+
+void Menu::load_genres() {
+	string buffer;
+	vector<string> tokens;
+	fstream f;
+	try {
+		f.open("Genres.txt");
+	}
+	catch (const exception& error) {
+		cout << "File didn't open " << error.what();
+		return;
+	}
+
+    while (getline(f, buffer)) {
+		Subgenre* new_genre = new Subgenre();
+		new_genre->set_name(buffer);
+		getline(f, buffer);
+		new_genre->set_description(buffer);
+		Subgenres.push_back(new_genre);
+	}
+}
+
+void Menu::print_genres() {
+	if (Subgenres.size() > 0) {
+		cout << "List of genres: " << endl;
+		for (int i = 0; i < Subgenres.size(); i++) {
+			cout << i + 1 << ". " << Subgenres[i]->get_name() << ":" << endl;
+			cout << "   " << Subgenres[i]->get_description() << endl;
+		}
+	} else {
+		cout << "No genres found in Genres.txt" << endl;
+	}
+}
+
+// void Menu::menu_edit_genres() {
+// 	string user_input;
+// 	int int_case;
+// 	while (1) {
+// 		cout << "Edit menu" << endl
+// 			<< "1 - Add genre" << endl
+// 			<< "2 - Edit genre" << endl
+// 			<< "3 - Delete genre" << endl
+// 			<< "0 - Back to main menu" << endl
+// 			<< "> ";
+// 		getline(cin, user_input);
+// 		cast_to_number(user_input, int_case);
+// 		switch (int_case) {
+// 		case 1:
+// 			Song::add_genre();
+// 			break;
+// 		case 2:
+// 			menu_edit_song();
+// 			break;
+// 		case 3:
+// 			delete_song();
+// 			break;
+// 		case 0:
+// 			return;
+// 		default:
+// 			cout << "Incorrect input" << endl;
+// 		}
+// 	}
+// }
+
+// void Menu::edit_genres() {
+	
+// }

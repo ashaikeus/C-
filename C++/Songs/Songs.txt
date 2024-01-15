@@ -1,16 +1,44 @@
 <Rock>
-1
-1
-1
-1
-1
-1
-1
-1
+Aries
+Widek
+Outside the Universe
+Widek Records
+None
+2014
+243
+0
 <Genres>
 1
 1
 1
+melodic metal
+</Genres>
+<Featuring>
+Gru
+</Featuring>
+<Lyricists>
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
+1
+0
+0
+0
+</Rock>
+<Rock>
+Therapy
+The Hunger
+The Hunger
+The Hunger
+English
+2020
+272
+0
+<Genres>
+industrial metal
+metal
 </Genres>
 <Featuring>
 </Featuring>
@@ -20,8 +48,169 @@
 </Nominations>
 <Used in>
 </Used in>
+1
 0
+1
+0
+</Rock>
+<Audiobook>
+����㯫���� � ���������
+��� ���⮥�᪨�
+608
+Russian
+<Voice actors>
+����� ���⮥�᪨�
+</Voice actors>
+</Audiobook>
+<Song>
+Unstoppable
+Sia
+This Is Acting
+Monkey Puzzle
+English
+2022
+207
+0
+<Genres>
+electropop
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Sia Furler
+Christopher Braide
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+commercial for the Lancome Idole fragrance
+</Used in>
+</Song>
+<Song>
+Are You Satisfied?
+MARINA
+The Family Jewels
+Atlantic Records
+English
+2010
+199
+0
+<Genres>
+pop
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Marina Diamandis
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
+</Song>
+<Song>
+Paparazzi
+Lady Gaga
+The Fame
+Streamline
+English
+2009
+209
+0
+<Genres>
+synth-pop
+dance-pop
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Stefani Germanotta
+Rob Fusari
+</Lyricists>
+<Nominations>
+MTV Video Music Award for Best Art Direction
+MTV Video Music Award for Best Visual Effects
+</Nominations>
+<Used in>
+</Used in>
+</Song>
+<Rock>
+Hate Us and See If We Mind
+ROME
+A Passage to Rhodesia
+Trisol Music Group GmbH
+English
+2014
+261
+0
+<Genres>
+neofolk
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Jerome Reuter
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
 0
 1
 1
+0
+</Rock>
+<Hiphop>
+Without Me
+Eminem
+The Eminem Show
+2002
+English
+2002
+291
+1
+<Genres>
+comedy hip hop
+rap
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Marshall Mathers
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
+0
+0
+0
+6
+</Hiphop>
+<Rock>
+Vpusti v sebya dobro
+ZHSCH
+Obratno
+ZHSCH
+Russian
+2017
+153
+1
+<Genres>
+russian rock
+doomer
+</Genres>
+<Featuring>
+</Featuring>
+<Lyricists>
+Igor Vlasyev
+</Lyricists>
+<Nominations>
+</Nominations>
+<Used in>
+</Used in>
+1
+1
+1
+0
 </Rock>

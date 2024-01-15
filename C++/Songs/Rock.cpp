@@ -66,7 +66,7 @@ string Rock::to_String() {
     end_result += to_string(year) + "\n" + to_string(length) + "\n" + to_string(is_explicit) + "\n";
     end_result += "<Genres>\n";
 	for (int i = 0; i < genres.size(); i++) {
-		end_result += genres[i] + "\n";
+		end_result += genres[i].name + "\n";
 	}
 	end_result += "</Genres>\n";
     end_result += "<Featuring>\n";

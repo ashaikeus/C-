@@ -6,6 +6,7 @@ using namespace std;
 #include <string>
 #include <cmath>
 #include "functions.h"
+#include "Subgenre.h"
 
 class Song {
     friend class Menu;
@@ -18,7 +19,7 @@ protected:
     int year;
     int length;  // in seconds
     bool is_explicit;
-    vector<string> genres;
+    vector<Subgenre> genres;
     vector<string> featuring;
     vector<string> lyricists;
     vector<string> nominations;
@@ -51,7 +52,7 @@ public:
     void set_year(int);
     void set_length(int);
     void set_is_explicit(bool);
-    void set_genres(vector<string>);
+    void set_genres(vector<Subgenre>);
     void set_featuring(vector<string>);
     void set_lyricists(vector<string>);
     void set_nominations(vector<string>);
